@@ -4,6 +4,7 @@ var array=[];
 var cat=[];
 var ser=[];
 var tol=[];
+var sec=[];
 
 fs.readFile('../output.txt', 'ascii', function(err,data){
 	if(err){
@@ -14,7 +15,8 @@ fs.readFile('../output.txt', 'ascii', function(err,data){
 			cat.push(array[i]);
 			tol.push(array[i+1]);
 			ser.push(array[i+2]);
-			i+=2;
+			sec.push(array[i+3]);
+			i+=3;
 
 		};
 	};
@@ -38,7 +40,10 @@ res.write('title: {\n');
 res.write("    text: 'Performance Test'\n");
 res.write('},\n');
 res.write('xAxis: [{\n');
-res.write("    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']\n");
+res.write('    categories: ['+sec+'],\n');
+res.write('     title: {\n');
+res.write("      text: 'Seconds after the test starts'\n");
+res.write('     }\n');
 res.write('}],\n');
 res.write('yAxis: [{ // Primary yAxis\n');
 res.write('    labels: {\n');
@@ -119,4 +124,4 @@ res.write('<div id="container" style="width: 100%; height: 400px"></div>\n');
 res.write('</body>\n');
 res.write('</html>\n');
 res.end();
-}).listen(8080);
+}).listen(8081);
